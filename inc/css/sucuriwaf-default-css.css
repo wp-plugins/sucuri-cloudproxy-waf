@@ -1,0 +1,37 @@
+/**
+ * Sucuri CloudProxy WAF
+ * Copyright (C) 2010-2013 Sucuri Security - http://sucuri.net/
+ * Released under the GPL - see LICENSE file for details.
+ */
+
+.sucuriwaf_header{background:#333;min-width:255px;margin:20px 0;padding:10px;position:relative;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px}
+.sucuriwaf_header img{float:left;height:40px;background:#fff;border-radius:4px}
+.wrap .sucuriwaf_header h2{color:#fff;float:left;margin-left:10px;line-height:40px;text-shadow:#000 0 1px 0;padding:0}
+.sucuriwaf-maincontent{padding:0 20px 0 0}
+.sucuriwaf-maincontent #poststuff{padding-top:0;margin:0 0 20px 0}
+.sucuriwaf-maincontent .postbox{margin:0}
+#sidebar{padding-top:10px}
+#sidebar .sucuriwaf-sidebar{border:1px solid #CCCCCC;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border-top-left-radius:5px;border-top-right-radius:5px;margin:0 0 10px;padding:10px 15px}
+#sitecleanup.sucuriwaf-sidebar{background-color:#bbe8f5;border-color:#4393ac}
+#sucuri-latest-posts.sucuriwaf-sidebar{background-color:#ececec;border-color:#999}
+.sucuriwaf-maincontent .widefat tbody th.check-column{padding:6px 0 3px 0}
+.sucuriwaf-maincontent .hardening-box .primary-secondary{margin:0 0 0 10px}
+.sucuriwaf-maincontent a.lastlogins-showall{display:inline-block;float:right}
+.sucuri-alert{position:relative}
+.sucuri-alert-updated{background-color:#bbe8f5 !important;border-color:#4393ac !important}
+.sucuri-alert > a.close{position:absolute;top:8px;right:10px;font-size:18px;text-decoration:none}
+.sucuri-visible{}
+.sucuri-hidden{display:none !important}
+.sucuriwaf-disabled{}
+.sucuriwaf-disabled #poststuff h3{color:#ff0000}
+.sucuriwaf-sidebar{width:25%}
+.sucuriwaf-sidebar #sidebar{padding:0}
+table.sucuriwaf-settings{margin:0 0 20px 0}
+table.sucuriwaf-settings td{padding:5px}
+table.sucuriwaf-settings label{display:block;line-height:24px}
+table.sucuriwaf-settings .monospace{font-family:Monospace, Courier, consola;font-weight:bold;line-height:24px}
+.sucuriwaf-settings .sucuriwaf-apikey-form{}
+.sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-entry{float:left;width:350px;font-family:Monospace, Courier, consola;border-radius:0;padding:0 5px;margin:0;line-height:22px}
+.sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-button{float:left;margin:0 0 0 5px}
+.sucuriwaf-clearcache-form{}
+.clearfix{clear:both}
