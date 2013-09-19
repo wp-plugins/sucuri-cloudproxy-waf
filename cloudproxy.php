@@ -249,17 +249,30 @@ function sucuri_waf_page(){
         isset($_POST['sucuriwaf_wponce'])
         && wp_verify_nonce($_POST['sucuriwaf_wponce'], 'sucuriwaf_wponce')
     ){
-        if(
-            isset($_POST['sucuriwaf_apikey'])
-            && preg_match('/.*\/.*/', $_POST['sucuriwaf_apikey'])
-        ){
-            update_option('sucuriwaf_apikey', $_POST['sucuriwaf_apikey']);
+        if( isset($_POST['sucuriwaf_apikey']) ){
+            $sucuriwaf_apikey = $_POST['sucuriwaf_apikey'];
+            if( preg_match('/.*\/.*/', $sucuriwaf_apikey) ){
+                sucuriwaf_admin_notice('updated', 'Sucuri CloudProxy WAF API key updated successfully');
+                update_option('sucuriwaf_apikey', $sucuriwaf_apikey);
+            }elseif( empty($sucuriwaf_apikey) ){
+                sucuriwaf_admin_notice('updated', 'Sucuri CloudProxy WAF API key removed successfully,
+                    if that was a mistake update that form field using this key: '.get_option('sucuriwaf_apikey'));
+                delete_option('sucuriwaf_apikey');
+            }else{
+                sucuriwaf_admin_notice('error', 'Sucuri CloudProxy WAF API key format invalid, check your settings and try again.');
+            }
         }
 
         if( isset($_POST['sucuriwaf_clearcache']) ){
             $clearcache_response = sucuriwaf_clearcache();
-            $success_or_fail = preg_match('/^OK:/', $clearcache_response) ? 'updated' : 'error';
-            sucuriwaf_admin_notice($success_or_fail, $clearcache_response);
+            if( $clearcache_response ){
+                $success_or_fail = preg_match('/^OK:/', $clearcache_response) ? 'updated' : 'error';
+                sucuriwaf_admin_notice($success_or_fail, $clearcache_response);
+            }else{
+                sucuriwaf_admin_notice('error', 'Sucuri CloudProxy WAF is not enabled for your site,
+                    or your API key is invalid. Check your settings bellow, if you think this is an
+                    error, contact the developer of the Plugin.');
+            }
         }
     }
 
@@ -269,7 +282,7 @@ function sucuri_waf_page(){
     $template_variables = array(
         'PluginURL'=>SUCURIWAF_URL,
         'WordpressNonce'=>wp_create_nonce('sucuriwaf_wponce'),
-        'Sidebar'=>sucuriwaf_get_template('sidebar.html.tpl'),
+        'Sidebar'=>'', /*sucuriwaf_get_template('sidebar.html.tpl')*/
         'DisabledDisplay'=>sucuriwaf_is_active() ? 'hidden' : 'visible',
         'APIKey'=>( !empty($api_key) ? $api_key['string'] : '' ),
         'RealRemoteAddr'=>sucuriwaf_real_remoteaddr(),

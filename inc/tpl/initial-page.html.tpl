@@ -7,7 +7,7 @@
         <br class="clear"/>
     </div>
 
-    <div class="postbox-container" style="width:75%">
+    <div class="postbox-container">
         <div class="sucuriwaf-maincontent">
             <div id="poststuff">
                 <div class="postbox">
