@@ -122,7 +122,7 @@ function sucuriwaf_admin_notice($type='updated', $message=''){
     $alert_id = rand(100, 999);
     if( !empty($message) ): ?>
         <div id="sucuri-alert-<?php echo $alert_id; ?>" class="<?php echo $type; ?> sucuri-alert sucuri-alert-<?php echo $type; ?>">
-            <a href="javascript:void(0)" class="close" onclick="sucuri_alert_close('<?php echo $alert_id; ?>')">&times;</a>
+            <a href="javascript:void(0)" class="close" onclick="sucuriwaf_alert_close('<?php echo $alert_id; ?>')">&times;</a>
             <p><?php _e($message); ?></p>
         </div>
     <?php endif;
@@ -225,6 +225,12 @@ function sucuriwaf_real_remoteaddr(){
 add_action( 'admin_enqueue_scripts', 'sucuriwaf_admin_script_style_registration', 1 );
 function sucuriwaf_admin_script_style_registration() { ?>
     <link rel="stylesheet" href="<?php echo SUCURIWAF_URL; ?>/inc/css/sucuriwaf-default-css.css" type="text/css" media="all" />
+    <script type="text/javascript">
+    function sucuriwaf_alert_close(id){
+        var element = document.getElementById('sucuri-alert-'+id);
+        element.parentNode.removeChild(element);
+    }
+    </script>
 <?php }
 
 
