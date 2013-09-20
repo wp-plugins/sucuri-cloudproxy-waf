@@ -33,10 +33,9 @@
                         </ol>
 
                         <p>
-                            Our WordPress Security Plugin will monitor your site from the inside, creating
-                            a complete audit trail, alerting you of possible security issues (file changes,
-                            password guessing attacks, etc) and blocking the attackers. This is the perfect
-                            complement for our external security scans.
+                            Once enabled, our firewall will act as a shield, protecting your site from attacks
+                            and preventing malware infections and reinfections. It will block SQL injection attempts,
+                            brute force attacks, XSS, RFI, backdoors and many other threats against your site.
                         </p>
                     </div>
                 </div>
