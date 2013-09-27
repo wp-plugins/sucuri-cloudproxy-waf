@@ -103,12 +103,12 @@
             <table class="wp-list-table widefat">
                 <thead>
                     <tr>
-                        <th colspan="4">Last audit logs</th>
+                        <th colspan="4">Last audit logs (%%SUCURI.AuditLogs.CountText%%)</th>
                     </tr>
                     <tr>
-                        <th width="28%">Denial Type</th>
-                        <th width="23%">Date & Time</th>
-                        <th width="23%">Remote Address</th>
+                        <th width="400">Denial Type</th>
+                        <th width="200">Date & Time</th>
+                        <th width="140">Remote Address</th>
                         <th>Request</th>
                     </tr>
                 </thead>
@@ -118,7 +118,10 @@
                 </tbody>
             </table>
 
-            <p><strong>If you have any questions about this plugin, contact us at <a href="mailto:info@sucuri.net" target="_blank">info@sucuri.net</a> or visit <a href="http://sucuri.net/" target="_blank">sucuri.net</a></strong></p>
+            <p>
+                <strong>If you have any questions about this plugin, contact us at <a href="mailto:info@sucuri.net" target="_blank">info@sucuri.net</a>
+                or visit <a href="http://sucuri.net/" target="_blank">sucuri.net</a></strong>
+            </p>
         </div>
     </div>
 

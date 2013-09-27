@@ -184,12 +184,14 @@ function sucuriwaf_auditlogs(){
         if( !empty($audit_logs_response['output']) ){
             $lines = explode("\n", $audit_logs_response['output']);
             foreach($lines as $line){
-                if( preg_match('/^\[([a-zA-Z0-9:\-\/]{25})\](\d+\.\d+\.\d+\.\d+):([a-zA-Z ]+):(.*)$/', $line, $match) ){
+                if( preg_match('/^\[([a-zA-Z0-9:\-\+\/]{25})\](\d+\.\d+\.\d+\.\d+):(.*)$/', $line, $match) ){
+                    /* Don't put this in the Regex above, this is to be sure that we are not filtering anything. */
+                    $request = explode(':', $match[3], 2);
                     $audit_logs[] = array(
                         'datetime'=>$match[1],
                         'remote_addr'=>$match[2],
-                        'denial_type'=>$match[3],
-                        'request'=>$match[4],
+                        'denial_type'=>$request[0],
+                        'request'=>$request[1],
                     );
                 }
             }
@@ -304,6 +306,8 @@ function sucuri_waf_page(){
     if( $api_key ){
         $audit_logs = sucuriwaf_auditlogs();
         if( !empty($audit_logs) ){
+            $template_variables['AuditLogs.Count'] = count($audit_logs);
+            $template_variables['AuditLogs.CountText'] = $template_variables['AuditLogs.Count'].' logs';
             foreach($audit_logs as $audit_log){
                 $audit_log_snippet = array(
                     'AuditLog.Datetime'=>$audit_log['datetime'],

@@ -35,3 +35,4 @@ table.sucuriwaf-settings .monospace{font-family:Monospace, Courier, consola;font
 .sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-button{float:left;margin:0 0 0 5px}
 .sucuriwaf-clearcache-form{}
 .clearfix{clear:both}
+td .sucuri-scrool{width:600px;overflow:auto}
