@@ -63,7 +63,7 @@
                     </li>
 
                     <tr>
-                        <td><label>Your real IP address</label></td>
+                        <td><label>Your CloudProxy Ip address</label></td>
                         <td><span class="monospace">%%SUCURI.RealRemoteAddr%%</span></td>
                     </tr>
                     <tr>
