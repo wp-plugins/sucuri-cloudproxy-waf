@@ -223,6 +223,17 @@ function sucuriwaf_real_remoteaddr(){
     return isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : gethostbyname($_SERVER['HTTP_HOST']);
 }
 
+function sucuriwaf_cachemode_translation($cache_mode=''){
+    $translation = 'Unknown';
+    switch($cache_mode){
+        case 'docache':      $translation = 'Enabled (recommended)'; break;
+        case 'sitecahce':    $translation = 'Site caching (using your site headers)'; break;
+        case 'nocache':      $translation = 'Minimial (only for a few minutes)'; break;
+        case 'nocacheatall': $translation = 'Caching didabled (use with caution)'; break;
+    }
+    return $translation;
+}
+
 /* CSS */
 add_action( 'admin_enqueue_scripts', 'sucuriwaf_admin_script_style_registration', 1 );
 function sucuriwaf_admin_script_style_registration() { ?>
@@ -299,7 +310,7 @@ function sucuri_waf_page(){
         'InternalIP'=>$settings['internalip'],
         'WhitelistedIPs'=>str_replace(chr(32), ' - ', $settings['whitelistedips']),
         'SecurityMode'=>$settings['securitymode'],
-        'CacheMode'=>$settings['cachemode'],
+        'CacheMode'=>sucuriwaf_cachemode_translation($settings['cachemode']),
         'AuditLogs'=>''
     );
 
