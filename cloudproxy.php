@@ -16,7 +16,7 @@ if(!function_exists('add_action'))
 
 
 define('SUCURIWAF','sucuriwaf');
-define('SUCURIWAF_VERSION','0.3');
+define('SUCURIWAF_VERSION','0.4');
 define('SUCURIWAF_URL',plugin_dir_url( __FILE__ ));
 define('SUCURIWAF_PLUGIN_FOLDER', 'sucuri-cloudproxy-waf');
 define('SUCURIWAF_CLOUDPROXY_URL', 'http://cloudproxy.sucuri.net/');
