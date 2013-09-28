@@ -311,7 +311,9 @@ function sucuri_waf_page(){
         'WhitelistedIPs'=>str_replace(chr(32), ' - ', $settings['whitelistedips']),
         'SecurityMode'=>$settings['securitymode'],
         'CacheMode'=>sucuriwaf_cachemode_translation($settings['cachemode']),
-        'AuditLogs'=>''
+        'AuditLogs'=>'',
+        'AuditLogs.Count'=>0,
+        'AuditLogs.CountText'=>'0 logs';
     );
 
     if( $api_key ){
