@@ -140,8 +140,8 @@ function sucuriwaf_apikey(){
 }
 
 function sucuriwaf_is_active(){
-    if( isset($_SERVER['SUCURIREAL_REMOTE_ADDR']) ){ return TRUE; }
-    if( preg_match('/cloudproxy.*\.sucuri\.net/', gethostbyaddr($_SERVER['REMOTE_ADDR'])) ){ return TRUE; }
+    $server_address = gethostbyname($_SERVER['HTTP_HOST']);
+    if( preg_match('/cloudproxy.*\.sucuri\.net/', gethostbyaddr($server_address)) ){ return TRUE; }
 
     return FALSE;
 }
