@@ -41,6 +41,9 @@ Once enabled, it will protect your site against malware infections and reinfecti
 
 == Changelog ==
 
+= 0.4 =
+* Adding more details on the caching type and audit logs.
+
 = 0.3 =
 * Fixed some typos.
 
