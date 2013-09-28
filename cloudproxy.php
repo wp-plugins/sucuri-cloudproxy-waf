@@ -313,7 +313,7 @@ function sucuri_waf_page(){
         'CacheMode'=>sucuriwaf_cachemode_translation($settings['cachemode']),
         'AuditLogs'=>'',
         'AuditLogs.Count'=>0,
-        'AuditLogs.CountText'=>'0 logs';
+        'AuditLogs.CountText'=>'0 logs'
     );
 
     if( $api_key ){
