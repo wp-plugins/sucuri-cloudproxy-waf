@@ -4,7 +4,7 @@ Plugin Name: Sucuri CloudProxy Web Firewall (WAF)
 Plugin URI: http://cloudproxy.sucuri.net/
 Description: The Sucuri CloudProxy WAF plugin allows you to access your WAF dashboard directly from WordPress. You will be able to change your settings, clear caching and see all the attacks that are being blocked.
 Author: Sucuri, INC
-Version: 0.4
+Version: 0.5
 Author URI: http://sucuri.net
 */
 
@@ -16,7 +16,7 @@ if(!function_exists('add_action'))
 
 
 define('SUCURIWAF','sucuriwaf');
-define('SUCURIWAF_VERSION','0.4');
+define('SUCURIWAF_VERSION','0.5');
 define('SUCURIWAF_URL',plugin_dir_url( __FILE__ ));
 define('SUCURIWAF_PLUGIN_FOLDER', 'sucuri-cloudproxy-waf');
 define('SUCURIWAF_CLOUDPROXY_URL', 'http://cloudproxy.sucuri.net/');
