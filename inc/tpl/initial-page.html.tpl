@@ -116,6 +116,16 @@
                 <tbody>
                     %%SUCURI.AuditLogs%%
                 </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <div class='pagination' style="float:right;">
+                                %%SUCURI.AuditPagination%%
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
 
             <p>
