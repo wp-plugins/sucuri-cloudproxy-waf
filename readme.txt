@@ -41,6 +41,9 @@ Once enabled, it will protect your site against malware infections and reinfecti
 
 == Changelog ==
 
+= 0.7 =
+* Adding pagination to the results.
+
 = 0.6 =
 * A few more audit logs improvements.
 
