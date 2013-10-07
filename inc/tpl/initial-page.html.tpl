@@ -63,6 +63,10 @@
                     </li>
 
                     <tr>
+                        <td><label>Website</label></td>
+                        <td><span class="monospace">%%SUCURI.Website%%</span></td>
+                    </tr>
+                    <tr>
                         <td><label>Your CloudProxy Ip address</label></td>
                         <td><span class="monospace">%%SUCURI.RealRemoteAddr%%</span></td>
                     </tr>

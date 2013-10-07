@@ -304,6 +304,7 @@ function sucuri_waf_page(){
         'Sidebar'=>'', /*sucuriwaf_get_template('sidebar.html.tpl')*/
         'DisabledDisplay'=>sucuriwaf_is_active() ? 'hidden' : 'visible',
         'APIKey'=>( !empty($api_key) ? $api_key['string'] : '' ),
+        'Website'=>$settings['site'],
         'RealRemoteAddr'=>sucuriwaf_real_remoteaddr(),
         'CloudproxyState'=>sucuriwaf_is_active() ? 'Enabled' : 'Disabled',
         'Site'=>$settings['site'],
