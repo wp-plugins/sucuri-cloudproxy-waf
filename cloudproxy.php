@@ -325,18 +325,21 @@ function sucuri_waf_page(){
 
             $pages = array_chunk($audit_logs, $pagination_perpage);
             $pgkey = isset($_GET['show_audit_logs_page']) ? intval($_GET['show_audit_logs_page']) : 1;
+            $audit_log_list = $pages[$pgkey-1];
 
             $template_variables['AuditLogs.Count'] = count($audit_logs);
             $template_variables['AuditLogs.CountText'] = $template_variables['AuditLogs.Count'].' logs';
 
-            foreach($pages[$pgkey-1] as $audit_log){
-                $audit_log_snippet = array(
-                    'AuditLog.Datetime'=>$audit_log['datetime'],
-                    'AuditLog.RemoteAddr'=>$audit_log['remote_addr'],
-                    'AuditLog.DenialType'=>$audit_log['denial_type'],
-                    'AuditLog.Request'=>$audit_log['request'],
-                );
-                $template_variables['AuditLogs'] .= sucuriwaf_get_template('auditlogs.snippet.tpl', $audit_log_snippet);
+            if( is_array($audit_log_list) && !empty($audit_log_list) ){
+                foreach($audit_log_list as $audit_log){
+                    $audit_log_snippet = array(
+                        'AuditLog.Datetime'=>$audit_log['datetime'],
+                        'AuditLog.RemoteAddr'=>$audit_log['remote_addr'],
+                        'AuditLog.DenialType'=>$audit_log['denial_type'],
+                        'AuditLog.Request'=>$audit_log['request'],
+                    );
+                    $template_variables['AuditLogs'] .= sucuriwaf_get_template('auditlogs.snippet.tpl', $audit_log_snippet);
+                }
             }
 
             if( count($audit_logs) > $pagination_perpage ){
