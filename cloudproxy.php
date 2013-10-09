@@ -187,18 +187,51 @@ function sucuriwaf_auditlogs(){
                 if( preg_match('/^\[([a-zA-Z0-9:\-\+\/]{25})\](\d+\.\d+\.\d+\.\d+):(.*)$/', $line, $match) ){
                     /* Don't put this in the Regex above, this is to be sure that we are not filtering anything. */
                     $request = explode(':', $match[3], 2);
-                    $audit_logs[] = array(
+                    $audit_log = array(
                         'datetime'=>$match[1],
+                        'datetime_date'=>'',
+                        'datetime_time'=>'',
+                        'datetime_timezone'=>'',
                         'remote_addr'=>$match[2],
                         'denial_type'=>$request[0],
                         'request'=>$request[1],
                     );
+                    if( preg_match('/^([0-9]{2}\/[a-zA-Z]{3}\/[0-9]{4}):([0-9]{2}:[0-9]{2}:[0-9]{2})(.*)/', $audit_log['datetime'], $datetime_match) ){
+                        $audit_log['datetime_date'] = $datetime_match[1];
+                        $audit_log['datetime_time'] = $datetime_match[2];
+                        $audit_log['datetime_timezone'] = $datetime_match[3];
+                    }
+                    $audit_logs[] = $audit_log;
                 }
             }
         }
     }
 
     return !empty($audit_logs) ? $audit_logs : FALSE;
+}
+
+function sucuriwaf_str_human2var($string=''){
+    $string = strtolower($string);
+    foreach(array( chr(32),'-','&', '/' ) as $char){
+        $string = str_replace($char, '_', $string);
+    }
+    return $string;
+}
+
+function sucuriwaf_auditlogs_denial_types($audit_logs=array()){
+    $denial_types = array();
+    if( is_array($audit_logs) && !empty($audit_logs) ){
+        foreach($audit_logs as $auditlog){
+            if(
+                isset($auditlog['denial_type'])
+                && !array_key_exists($auditlog['denial_type'], $denial_types)
+            ){
+                $denial_type_k = sucuriwaf_str_human2var($auditlog['denial_type']);
+                $denial_types[$denial_type_k] = $auditlog['denial_type'];
+            }
+        }
+    }
+    return $denial_types;
 }
 
 function sucuriwaf_clearcache(){
@@ -264,39 +297,11 @@ function sucuri_waf_page(){
         wp_die(__('You do not have sufficient permissions to access this page: Sucuri WAF page.') );
     }
 
-    if(
-        isset($_POST['sucuriwaf_wponce'])
-        && wp_verify_nonce($_POST['sucuriwaf_wponce'], 'sucuriwaf_wponce')
-    ){
-        if( isset($_POST['sucuriwaf_apikey']) ){
-            $sucuriwaf_apikey = $_POST['sucuriwaf_apikey'];
-            if( preg_match('/.*\/.*/', $sucuriwaf_apikey) ){
-                sucuriwaf_admin_notice('updated', 'Sucuri CloudProxy WAF API key updated successfully');
-                update_option('sucuriwaf_apikey', $sucuriwaf_apikey);
-            }elseif( empty($sucuriwaf_apikey) ){
-                sucuriwaf_admin_notice('updated', 'Sucuri CloudProxy WAF API key removed successfully,
-                    if that was a mistake update that form field using this key: '.get_option('sucuriwaf_apikey'));
-                delete_option('sucuriwaf_apikey');
-            }else{
-                sucuriwaf_admin_notice('error', 'Sucuri CloudProxy WAF API key format invalid, check your settings and try again.');
-            }
-        }
-
-        if( isset($_POST['sucuriwaf_clearcache']) ){
-            $clearcache_response = sucuriwaf_clearcache();
-            if( $clearcache_response ){
-                $success_or_fail = preg_match('/^OK:/', $clearcache_response) ? 'updated' : 'error';
-                sucuriwaf_admin_notice($success_or_fail, $clearcache_response);
-            }else{
-                sucuriwaf_admin_notice('error', 'Sucuri CloudProxy WAF is not enabled for your site,
-                    or your API key is invalid. Check your settings bellow, if you think this is an
-                    error, contact the developer of the Plugin.');
-            }
-        }
-    }
-
     $api_key = sucuriwaf_apikey();
     $settings = sucuriwaf_settings();
+    $audit_logs = $api_key ? sucuriwaf_auditlogs() : array();
+    $pagination_perpage = 20;
+    $show_pagination = count($audit_logs)>$pagination_perpage ? TRUE : FALSE;
 
     $template_variables = array(
         'PluginURL'=>SUCURIWAF_URL,
@@ -315,43 +320,112 @@ function sucuri_waf_page(){
         'AuditLogs'=>'',
         'AuditLogs.Count'=>0,
         'AuditLogs.CountText'=>'0 logs',
-        'AuditPagination' => ''
+        'AuditPagination' => '',
+        'DenialTypeOptions'=>''
     );
 
-    if( $api_key ){
-        $audit_logs = sucuriwaf_auditlogs();
-        $pagination_perpage = 20;
+    // Get all distinct denial types from the audit log list.
+    $auditlogs_denial_types = sucuriwaf_auditlogs_denial_types($audit_logs);
+    if( $auditlogs_denial_types ){
+        $template_variables['DenialTypeOptions'] .= "<option value=''>Filter</option>\n";
+        foreach($auditlogs_denial_types as $denial_type_k=>$denial_type_v){
+            $template_variables['DenialTypeOptions'] .= "<option value='{$denial_type_k}'>{$denial_type_v}</option>\n";
+        }
+    }
 
-        if( !empty($audit_logs) ){
+    // Process POST requests.
+    if(
+        isset($_POST['sucuriwaf_wponce'])
+        && wp_verify_nonce($_POST['sucuriwaf_wponce'], 'sucuriwaf_wponce')
+    ){
+        // Add and/or Update the Sucuri WAF API Key.
+        if( isset($_POST['sucuriwaf_apikey']) ){
+            $sucuriwaf_apikey = $_POST['sucuriwaf_apikey'];
+            if( preg_match('/.*\/.*/', $sucuriwaf_apikey) ){
+                sucuriwaf_admin_notice('updated', 'Sucuri CloudProxy WAF API key updated successfully');
+                update_option('sucuriwaf_apikey', $sucuriwaf_apikey);
+            }elseif( empty($sucuriwaf_apikey) ){
+                sucuriwaf_admin_notice('updated', 'Sucuri CloudProxy WAF API key removed successfully,
+                    if that was a mistake update that form field using this key: '.get_option('sucuriwaf_apikey'));
+                delete_option('sucuriwaf_apikey');
+            }else{
+                sucuriwaf_admin_notice('error', 'Sucuri CloudProxy WAF API key format invalid, check your settings and try again.');
+            }
+        }
 
-            $pages = array_chunk($audit_logs, $pagination_perpage);
-            $pgkey = isset($_GET['show_audit_logs_page']) ? intval($_GET['show_audit_logs_page']) : 1;
-            $audit_log_list = $pages[$pgkey-1];
+        // Clear Sucuri WAF Cache.
+        if( isset($_POST['sucuriwaf_clearcache']) ){
+            $clearcache_response = sucuriwaf_clearcache();
+            if( $clearcache_response ){
+                $success_or_fail = preg_match('/^OK:/', $clearcache_response) ? 'updated' : 'error';
+                sucuriwaf_admin_notice($success_or_fail, $clearcache_response);
+            }else{
+                sucuriwaf_admin_notice('error', 'Sucuri CloudProxy WAF is not enabled for your site,
+                    or your API key is invalid. Check your settings bellow, if you think this is an
+                    error, contact the developer of the Plugin.');
+            }
+        }
 
-            $template_variables['AuditLogs.Count'] = count($audit_logs);
-            $template_variables['AuditLogs.CountText'] = $template_variables['AuditLogs.Count'].' logs';
-
-            if( is_array($audit_log_list) && !empty($audit_log_list) ){
-                foreach($audit_log_list as $audit_log){
-                    $audit_log_snippet = array(
-                        'AuditLog.Datetime'=>$audit_log['datetime'],
-                        'AuditLog.RemoteAddr'=>$audit_log['remote_addr'],
-                        'AuditLog.DenialType'=>$audit_log['denial_type'],
-                        'AuditLog.Request'=>$audit_log['request'],
-                    );
-                    $template_variables['AuditLogs'] .= sucuriwaf_get_template('auditlogs.snippet.tpl', $audit_log_snippet);
+        if( isset($_POST['sucuriwaf_denial_type']) ){
+            // Disable pagination and show all entries found with this filter.
+            $show_pagination = FALSE;
+            $audit_log_filter = htmlspecialchars(trim($_POST['sucuriwaf_denial_type']));
+            foreach($audit_logs as $i=>$audit_log){
+                $denial_type_slug = sucuriwaf_str_human2var($audit_log['denial_type']);
+                if( $denial_type_slug!=$audit_log_filter ){
+                    unset($audit_logs[$i]);
                 }
             }
+        }
 
-            if( count($audit_logs) > $pagination_perpage ){
-                for( $i=1; $i< count($pages)+1; $i++ ){
-
-                    $audit_pagination_snippet = array(
-                        'AuditPagination.CurrentPage'=> ( $pgkey==$i ) ? 'current' : '',
-                        'AuditPagination.PageNr'=>$i,
-                    );
-                    $template_variables['AuditPagination'] .= sucuriwaf_get_template('auditpagination.snippet.tpl', $audit_pagination_snippet);
+        if( isset($_POST['sucuriwaf_log_filter']) ){
+            // Disable pagination and show all entries found with this filter.
+            $show_pagination = FALSE;
+            $audit_log_filter = htmlspecialchars(trim($_POST['sucuriwaf_log_filter']));
+            foreach($audit_logs as $i=>$audit_log){
+                if(
+                    strpos($audit_log['remote_addr'], $audit_log_filter)===FALSE
+                    && strpos($audit_log['request'], $audit_log_filter)===FALSE
+                ){
+                    unset($audit_logs[$i]);
                 }
+            }
+        }
+    }
+
+    // Generate the view to render the page.
+    if( isset($audit_logs) && !empty($audit_logs) ){
+
+        $pages = array_chunk($audit_logs, $pagination_perpage);
+        $pgkey = isset($_GET['show_audit_logs_page']) ? intval($_GET['show_audit_logs_page']) : 1;
+        $audit_log_list = $show_pagination ? $pages[$pgkey-1] : $audit_logs;
+
+        $template_variables['AuditLogs.Count'] = count($audit_logs);
+        $template_variables['AuditLogs.CountText'] = $template_variables['AuditLogs.Count'].' logs';
+
+        if( is_array($audit_log_list) && !empty($audit_log_list) ){
+            foreach($audit_log_list as $audit_log){
+                $audit_log_snippet = array(
+                    'AuditLog.Datetime'=>$audit_log['datetime'],
+                    'AuditLog.Datetime.Date'=>$audit_log['datetime_date'],
+                    'AuditLog.Datetime.Time'=>$audit_log['datetime_time'],
+                    'AuditLog.Datetime.Timezone'=>$audit_log['datetime_timezone'],
+                    'AuditLog.RemoteAddr'=>$audit_log['remote_addr'],
+                    'AuditLog.DenialType'=>$audit_log['denial_type'],
+                    'AuditLog.Request'=>$audit_log['request'],
+                );
+                $template_variables['AuditLogs'] .= sucuriwaf_get_template('auditlogs.snippet.tpl', $audit_log_snippet);
+            }
+        }
+
+        if($show_pagination){
+            for( $i=1; $i< count($pages)+1; $i++ ){
+
+                $audit_pagination_snippet = array(
+                    'AuditPagination.CurrentPage'=> ( $pgkey==$i ) ? 'current' : '',
+                    'AuditPagination.PageNr'=>$i,
+                );
+                $template_variables['AuditPagination'] .= sucuriwaf_get_template('auditpagination.snippet.tpl', $audit_pagination_snippet);
             }
         }
     }

@@ -107,11 +107,29 @@
             <table class="wp-list-table widefat">
                 <thead>
                     <tr>
-                        <th colspan="4">Last audit logs (%%SUCURI.AuditLogs.CountText%%)</th>
+                        <th colspan="4" class="thead-with-button">
+                            <span>Last audit logs (%%SUCURI.AuditLogs.CountText%%)</span>
+                            <div class="sucuriwaf-search-log thead-topright-action">
+                                <form method="post">
+                                    <input type="hidden" name="sucuriwaf_wponce" value="%%SUCURI.WordpressNonce%%" />
+                                    <input type="text" name="sucuriwaf_log_filter" class="input-text" />
+                                    <input type="submit" value="Search Log" class="button button-primary" />
+                                </form>
+                            </div>
+                        </th>
                     </tr>
                     <tr>
-                        <th width="400">Denial Type</th>
-                        <th width="200">Date & Time</th>
+                        <th width="500" class="thead-with-button">
+                            <span>Denial Type</span>
+                            <div class="sucuriwaf-denial-types thead-topright-action">
+                                <form method="post">
+                                    <input type="hidden" name="sucuriwaf_wponce" value="%%SUCURI.WordpressNonce%%" />
+                                    <select name="sucuriwaf_denial_type">%%SUCURI.DenialTypeOptions%%</select>
+                                    <input type="submit" value="Filter" class="button button-primary" />
+                                </form>
+                            </div>
+                        </th>
+                        <th width="150">Date & Time</th>
                         <th width="140">Remote Address</th>
                         <th>Request</th>
                     </tr>

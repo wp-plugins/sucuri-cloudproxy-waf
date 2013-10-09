@@ -36,3 +36,12 @@ table.sucuriwaf-settings .monospace{font-family:Monospace, Courier, consola;font
 .sucuriwaf-clearcache-form{}
 .clearfix{clear:both}
 td .sucuri-scrool{width:600px;overflow:auto}
+.sucuriwaf-maincontent .thead-with-button span{line-height:24px}
+.sucuriwaf-maincontent .thead-with-button .input-text{line-height:22px}
+.sucuriwaf-maincontent .thead-topright-action{display:inline-block;float:right}
+.sucuriwaf-denial-types select{width:100px;font-size:12px;margin:0 5px 0 0;padding:0;float:left}
+.sucuriwaf-search-log .input-text{font-family:Monaco, Monospace, consola;padding:0 5px;margin:0 5px 0 0;width:200px}
+.pagination{clear:both;padding:0;position:relative}
+.pagination span, .pagination a{display:block;float:left;margin:0 2px 0 0;padding:5px 10px;text-decoration:none;width:auto;color:#fff;background:#555}
+.pagination a:hover{color:#fff;background:#3279BB}
+.pagination .current{background:#3279BB;color:#fff}
