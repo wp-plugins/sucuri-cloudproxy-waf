@@ -4,7 +4,7 @@ Plugin Name: Sucuri CloudProxy Web Firewall (WAF)
 Plugin URI: http://cloudproxy.sucuri.net/
 Description: The Sucuri CloudProxy WAF plugin allows you to access your WAF dashboard directly from WordPress. You will be able to change your settings, clear caching and see all the attacks that are being blocked.
 Author: Sucuri, INC
-Version: 0.7
+Version: 0.8
 Author URI: http://sucuri.net
 */
 
@@ -16,7 +16,7 @@ if(!function_exists('add_action'))
 
 
 define('SUCURIWAF','sucuriwaf');
-define('SUCURIWAF_VERSION','0.7');
+define('SUCURIWAF_VERSION','0.8');
 define('SUCURIWAF_URL',plugin_dir_url( __FILE__ ));
 define('SUCURIWAF_PLUGIN_FOLDER', 'sucuri-cloudproxy-waf');
 define('SUCURIWAF_CLOUDPROXY_URL', 'http://cloudproxy.sucuri.net/');
@@ -24,47 +24,10 @@ define('SUCURIWAF_CLOUDPROXY_URL', 'http://cloudproxy.sucuri.net/');
 /* Fixing the source IP */
 function sucuriwaf_init()
 {
-    $remote_ips = array(
-        '198.74.50.203',
-        '173.230.130.238',
-        '72.14.189.243',
-        '173.255.229.143',
-        '50.116.4.10',
-        '66.228.60.40',
-        '72.14.181.33',
-        '192.155.90.132',
-        '74.207.226.15',
-        '66.228.50.149',
-        '198.74.62.16',
-        '74.207.225.231',
-        '198.58.107.96',
-        '96.126.123.61',
-        '66.228.39.6',
-        '74.207.227.97',
-        '54.245.199.168',
-        '198.58.112.219',
-        '173.230.128.205',
-        '178.79.157.63',
-        '162.216.19.28',
-        '198.58.115.22',
-        '192.155.94.137',
-        '50.116.58.224',
-        '198.58.116.166',
-        '173.230.129.138',
-        '192.155.85.137',
-        '54.245.113.142',
-        '23.92.18.145',
-        '198.58.113.167',
-        '106.186.30.76',
-    );
-    foreach($remote_ips as $myip)
+    if(isset($_SERVER["HTTP_X_FORWARDED_FOR"]) && preg_match("/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/", $_SERVER["HTTP_X_FORWARDED_FOR"]))
     {
-        if($myip === $_SERVER['REMOTE_ADDR'])
-        {
-            $_SERVER["SUCURIREAL_REMOTE_ADDR"] = $_SERVER["REMOTE_ADDR"];
-            $_SERVER["REMOTE_ADDR"] = $_SERVER['X-FORWARDED-FOR'];
-            break;
-        }
+        $_SERVER["SUCURIREAL_REMOTE_ADDR"] = $_SERVER["REMOTE_ADDR"];
+        $_SERVER["REMOTE_ADDR"] = $_SERVER["HTTP_X_FORWARDED_FOR"];
     }
 }
 
@@ -151,7 +114,7 @@ function sucuriwaf_settings(){
     $api_key = sucuriwaf_apikey();
 
     if( $api_key ){
-        $settings_response = sucuriwaf_curl('https://dashboard.sucuri.net/cloudproxy/api', array(
+        $settings_response = sucuriwaf_curl('https://waf.sucuri.net/api', array(
             'k'=>$api_key['k'],
             's'=>$api_key['s'],
             'a'=>'showsettings'
@@ -175,7 +138,7 @@ function sucuriwaf_auditlogs(){
     $api_key = sucuriwaf_apikey();
 
     if( $api_key ){
-        $audit_logs_response = sucuriwaf_curl('https://dashboard.sucuri.net/cloudproxy/api', array(
+        $audit_logs_response = sucuriwaf_curl('https://waf.sucuri.net/api', array(
             'k'=>$api_key['k'],
             's'=>$api_key['s'],
             'a'=>'auditshow'
@@ -238,7 +201,7 @@ function sucuriwaf_clearcache(){
     $api_key = sucuriwaf_apikey();
 
     if( $api_key ){
-        $clearcache_response = sucuriwaf_curl('https://dashboard.sucuri.net/cloudproxy/api', array(
+        $clearcache_response = sucuriwaf_curl('https://waf.sucuri.net/api', array(
             'k'=>$api_key['k'],
             's'=>$api_key['s'],
             'a'=>'clearcache'
