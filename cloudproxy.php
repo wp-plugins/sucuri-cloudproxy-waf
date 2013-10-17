@@ -251,6 +251,8 @@ function sucuriwaf_menu()
                   'sucuriwaf', 'sucuri_waf_page', SUCURIWAF_URL.'images/menu-icon.png');
     add_submenu_page('sucuriwaf', 'Sucuri WAF', 'Sucuri WAF', 'manage_options',
                      'sucuriwaf', 'sucuri_waf_page');
+    add_submenu_page('sucuriwaf', 'About', 'About', 'manage_options',
+                     'sucuriwaf_about', 'sucuri_waf_about_page');
 }
 
 
@@ -394,6 +396,61 @@ function sucuri_waf_page(){
     }
 
     echo sucuriwaf_get_template('initial-page.html.tpl', $template_variables);
+}
+
+
+function sucuri_waf_about_page(){
+    if( !current_user_can('manage_options') ){
+        wp_die(__('You do not have sufficient permissions to access this page: Sucuri Last-Logins') );
+    }
+
+    // Page pseudo-variables initialization.
+    $template_variables = array(
+        'SucuriURL'=>SUCURI_PLUGIN_URL,
+        'CurrentURL'=>site_url().'/wp-admin/admin.php?page='.$_GET['page'],
+        'SettingsDisplay'=>'hidden'
+    );
+
+    $template_variables = sucuri_waf_about_information($template_variables);
+
+    echo sucuri_get_template('about.html.tpl', $template_variables);
+}
+
+function sucuri_waf_about_information($template_variables=array()){
+    global $wpdb;
+
+    if( current_user_can('manage_options') ){
+        $memory_usage = function_exists('memory_get_usage') ? round(memory_get_usage()/1024/1024,2).' MB' : 'N/A';
+        $mysql_version = $wpdb->get_var('SELECT VERSION() AS version');
+        $mysql_info = $wpdb->get_results('SHOW VARIABLES LIKE "sql_mode"');
+        $sql_mode = ( is_array($mysql_info) && !empty($mysql_info[0]->Value) ) ? $mysql_info[0]->Value : 'Not set';
+
+        $template_variables = array_merge($template_variables, array(
+            'SettingsDisplay'=>'block',
+            'PluginVersion'=>SUCURIWAF_VERSION,
+            'OperatingSystem'=>sprintf('%s (%d Bit)', PHP_OS, PHP_INT_SIZE*8),
+            'Server'=>isset($_SERVER['SERVER_SOFTWARE']) ? $_SERVER['SERVER_SOFTWARE'] : 'Unknown',
+            'MemoryUsage'=>$memory_usage,
+            'MySQLVersion'=>$mysql_version,
+            'SQLMode'=>$sql_mode,
+            'PHPVersion'=>PHP_VERSION,
+        ));
+
+        foreach(array(
+            'safe_mode',
+            'allow_url_fopen',
+            'memory_limit',
+            'upload_max_filesize',
+            'post_max_size',
+            'max_execution_time',
+        ) as $php_flag){
+            $php_flag_name = ucwords(str_replace('_', chr(32), $php_flag) );
+            $tpl_varname = str_replace(chr(32), '', $php_flag_name);
+            $template_variables[$tpl_varname] = ini_get($php_flag) ? ini_get($php_flag) : 'N/A';
+        }
+    }
+
+    return $template_variables;
 }
 
 
