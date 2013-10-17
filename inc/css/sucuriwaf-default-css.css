@@ -45,3 +45,9 @@ td .sucuri-scrool{width:600px;overflow:auto}
 .pagination span, .pagination a{display:block;float:left;margin:0 2px 0 0;padding:5px 10px;text-decoration:none;width:auto;color:#fff;background:#555}
 .pagination a:hover{color:#fff;background:#3279BB}
 .pagination .current{background:#3279BB;color:#fff}
+.sucuriwaf-about-page{}
+.sucuriwaf-about-page > .sucuriwaf-about-info, .sucuriwaf-about-page > .sucuriwaf-about-list{width:49%}
+.sucuriwaf-about-page > .sucuriwaf-about-info{float:left}
+.sucuriwaf-about-page > .sucuriwaf-about-info h4{font-size:14px;text-transform:uppercase;margin-bottom:0}
+.sucuriwaf-about-page > .sucuriwaf-about-list{float:right;clear:none}
+.sucuriwaf-about-list td+td{font-family:Monaco, Monspace, Courier;font-weight:bold}
