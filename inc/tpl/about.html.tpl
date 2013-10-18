@@ -19,6 +19,9 @@
                             It also supports any type of platform, from WordPress, Joomla, vBulletin to Magento, ASP.net and
                             even custom designs.
                         </p>
+                        <p>
+                            <a href="https://login.sucuri.net/signup2/create?CloudProxy" target="_blank" class="button button-primary button-hero">Sign up for CloudProxy WAF</a>
+                        </p>
                         <h4>Security in the Cloud</h4>
                         <p>
                             There is nothing to install. Simply point your DNS to CloudProxy, and we handle the rest.

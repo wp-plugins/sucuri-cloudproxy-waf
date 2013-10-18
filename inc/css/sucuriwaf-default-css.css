@@ -51,3 +51,4 @@ td .sucuri-scrool{width:600px;overflow:auto}
 .sucuriwaf-about-page > .sucuriwaf-about-info h4{font-size:14px;text-transform:uppercase;margin-bottom:0}
 .sucuriwaf-about-page > .sucuriwaf-about-list{float:right;clear:none}
 .sucuriwaf-about-list td+td{font-family:Monaco, Monspace, Courier;font-weight:bold}
+.sucuriwaf-about-page a.button-primary{display:table;margin:0 auto}
