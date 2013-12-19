@@ -107,7 +107,7 @@
             <table class="wp-list-table widefat">
                 <thead>
                     <tr>
-                        <th colspan="4" class="thead-with-button">
+                        <th colspan="5" class="thead-with-button">
                             <span>Last audit logs (%%SUCURI.AuditLogs.CountText%%)</span>
                             <div class="sucuriwaf-search-log thead-topright-action">
                                 <form method="post">
@@ -129,9 +129,10 @@
                                 </form>
                             </div>
                         </th>
-                        <th width="170">Date & Time</th>
+                        <th width="100">Date</th>
+                        <th width="120">Time (Timezone)</th>
                         <th width="150">Remote Address</th>
-                        <th>Request</th>
+                        <th>Request Path</th>
                     </tr>
                 </thead>
 
@@ -141,7 +142,7 @@
 
                 <tfoot>
                     <tr>
-                        <td colspan="4">
+                        <td colspan="5">
                             <div class='pagination' style="float:right;">
                                 %%SUCURI.AuditPagination%%
                             </div>

@@ -27,16 +27,15 @@
 .sucuriwaf-sidebar{width:25%}
 .sucuriwaf-sidebar #sidebar{padding:0}
 table.sucuriwaf-settings{margin:0 0 20px 0}
-table.sucuriwaf-settings td{padding:5px}
 table.sucuriwaf-settings label{display:block;line-height:24px}
-.sucuriwaf-monospace, table.sucuriwaf-settings .monospace{font-family:Monospace, Courier, consola}
+.sucuriwaf-monospace, table.sucuriwaf-settings .monospace, .sucuri-request-summary span{font-family:Monospace, Courier, consola}
 table.sucuriwaf-settings .monospace{font-weight:bold;line-height:24px}
 .sucuriwaf-settings .sucuriwaf-apikey-form{}
 .sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-entry{float:left;width:350px;font-family:Monospace, Courier, consola;border-radius:0;padding:0 5px;margin:0;line-height:26px}
 .sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-button{float:left;margin:0 0 0 5px}
 .sucuriwaf-clearcache-form{}
 .clearfix{clear:both}
-td .sucuri-scrool{word-break:break-all}
+td .sucuri-wraptext{word-break:break-all}
 .sucuriwaf-maincontent .thead-with-button span{line-height:24px}
 .sucuriwaf-maincontent .thead-with-button .input-text{line-height:26px}
 .sucuriwaf-maincontent .thead-topright-action{display:inline-block;float:right}
@@ -53,3 +52,7 @@ td .sucuri-scrool{word-break:break-all}
 .sucuriwaf-about-page .sucuriwaf-about-list{float:right;clear:none}
 .sucuriwaf-about-list td+td{font-family:Monaco, Monspace, Courier;font-weight:bold}
 .sucuriwaf-about-page a.button-primary{display:table;margin:0 auto}
+.sucuri-request-summary{}
+.sucuri-request-summary label, .sucuri-request-summary span{display:inline-block;font-size:14px}
+.sucuri-request-summary label{width:200px;font-weight:bold}
+.sucuri-request-summary span{max-width:395px;vertical-align:top;word-break:break-all;}

@@ -146,24 +146,43 @@ function sucuriwaf_auditlogs(){
 
         if( !empty($audit_logs_response['output']) ){
             $lines = explode("\n", $audit_logs_response['output']);
-            foreach($lines as $line){
+            foreach( (array)$lines as $line ){
                 if( preg_match('/^\[([a-zA-Z0-9:\-\+\/]{25})\](\d+\.\d+\.\d+\.\d+):(.*)$/', $line, $match) ){
                     /* Don't put this in the Regex above, this is to be sure that we are not filtering anything. */
                     $request = explode(':', $match[3], 2);
                     $audit_log = array(
-                        'datetime'=>$match[1],
-                        'datetime_date'=>'',
-                        'datetime_time'=>'',
-                        'datetime_timezone'=>'',
-                        'remote_addr'=>$match[2],
-                        'denial_type'=>$request[0],
-                        'request'=>$request[1],
+                        'datetime' => $match[1],
+                        'datetime_date' => '',
+                        'datetime_time' => '',
+                        'datetime_timezone' => '',
+                        'remote_addr' => $match[2],
+                        'denial_type' => $request[0],
+                        'request' => $request[1],
+                        'request_summary' => array()
                     );
+
+                    // Parse the date/time/timezone from a mixed string.
                     if( preg_match('/^([0-9]{2}\/[a-zA-Z]{3}\/[0-9]{4}):([0-9]{2}:[0-9]{2}:[0-9]{2})(.*)/', $audit_log['datetime'], $datetime_match) ){
                         $audit_log['datetime_date'] = $datetime_match[1];
                         $audit_log['datetime_time'] = $datetime_match[2];
                         $audit_log['datetime_timezone'] = $datetime_match[3];
                     }
+
+                    // Parse the request and separate each relevant part in an independent variable.
+                    $request_original = str_replace('&quot;', '"', $audit_log['request']);
+                    if( preg_match('/^\"(\S+) (.*?) (\S+)\" ([0-9]+) ([0-9]+) \"(.*?)\" \"(.*?)\"/', $request_original, $req_match) ){
+                        $audit_log['request_summary'] = array(
+                            'request_method' => $req_match[1],
+                            'resource_path' => $req_match[2],
+                            'http_protocol' => $req_match[3],
+                            'http_status' => $req_match[4],
+                            'http_status_title' => sucuriwaf_get_http_status_code($req_match[4]),
+                            'http_bytes_sent' => $req_match[5],
+                            'http_referer' => $req_match[6],
+                            'http_user_agent' => $req_match[7]
+                        );
+                    }
+
                     $audit_logs[] = $audit_log;
                 }
             }
@@ -228,6 +247,75 @@ function sucuriwaf_cachemode_translation($cache_mode=''){
         case 'nocacheatall': $translation = 'Caching didabled (use with caution)'; break;
     }
     return $translation;
+}
+
+function sucuriwaf_get_http_status_code($code=0){
+    $code = intval($code);
+    $status_codes = array(
+        100 => 'Continue',
+        101 => 'Switching Protocols',
+        102 => 'Processing',            // RFC2518
+        200 => 'OK',
+        201 => 'Created',
+        202 => 'Accepted',
+        203 => 'Non-Authoritative Information',
+        204 => 'No Content',
+        205 => 'Reset Content',
+        206 => 'Partial Content',
+        207 => 'Multi-Status',          // RFC4918
+        208 => 'Already Reported',      // RFC5842
+        226 => 'IM Used',               // RFC3229
+        300 => 'Multiple Choices',
+        301 => 'Moved Permanently',
+        302 => 'Found',
+        303 => 'See Other',
+        304 => 'Not Modified',
+        305 => 'Use Proxy',
+        306 => 'Reserved',
+        307 => 'Temporary Redirect',
+        308 => 'Permanent Redirect',    // RFC-reschke-http-status-308-07
+        400 => 'Bad Request',
+        401 => 'Unauthorized',
+        402 => 'Payment Required',
+        403 => 'Forbidden',
+        404 => 'Not Found',
+        405 => 'Method Not Allowed',
+        406 => 'Not Acceptable',
+        407 => 'Proxy Authentication Required',
+        408 => 'Request Timeout',
+        409 => 'Conflict',
+        410 => 'Gone',
+        411 => 'Length Required',
+        412 => 'Precondition Failed',
+        413 => 'Request Entity Too Large',
+        414 => 'Request-URI Too Long',
+        415 => 'Unsupported Media Type',
+        416 => 'Requested Range Not Satisfiable',
+        417 => 'Expectation Failed',
+        418 => 'I\'m a teapot',                                               // RFC2324
+        422 => 'Unprocessable Entity',                                        // RFC4918
+        423 => 'Locked',                                                      // RFC4918
+        424 => 'Failed Dependency',                                           // RFC4918
+        425 => 'Reserved for WebDAV advanced collections expired proposal',   // RFC2817
+        426 => 'Upgrade Required',                                            // RFC2817
+        428 => 'Precondition Required',                                       // RFC6585
+        429 => 'Too Many Requests',                                           // RFC6585
+        431 => 'Request Header Fields Too Large',                             // RFC6585
+        500 => 'Internal Server Error',
+        501 => 'Not Implemented',
+        502 => 'Bad Gateway',
+        503 => 'Service Unavailable',
+        504 => 'Gateway Timeout',
+        505 => 'HTTP Version Not Supported',
+        506 => 'Variant Also Negotiates (Experimental)',                      // RFC2295
+        507 => 'Insufficient Storage',                                        // RFC4918
+        508 => 'Loop Detected',                                               // RFC5842
+        510 => 'Not Extended',                                                // RFC2774
+        511 => 'Network Authentication Required',                             // RFC6585
+    );
+
+    if( isset($status_codes[$code]) ){ return $status_codes[$code]; }
+    return '';
 }
 
 /* CSS */
@@ -360,6 +448,7 @@ function sucuri_waf_page(){
 
     // Generate the view to render the page.
     if( isset($audit_logs) && !empty($audit_logs) ){
+        add_thickbox();
 
         $pages = array_chunk($audit_logs, $pagination_perpage);
         $pgkey = isset($_GET['show_audit_logs_page']) ? intval($_GET['show_audit_logs_page']) : 1;
@@ -369,16 +458,27 @@ function sucuri_waf_page(){
         $template_variables['AuditLogs.CountText'] = $template_variables['AuditLogs.Count'].' logs';
 
         if( is_array($audit_log_list) && !empty($audit_log_list) ){
-            foreach($audit_log_list as $audit_log){
+            foreach($audit_log_list as $i=>$audit_log){
                 $audit_log_snippet = array(
-                    'AuditLog.Datetime'=>$audit_log['datetime'],
+                    'AuditLog.Id' => $i,
+                    'AuditLog.Datetime' => $audit_log['datetime'],
                     'AuditLog.Datetime.Date'=>$audit_log['datetime_date'],
                     'AuditLog.Datetime.Time'=>$audit_log['datetime_time'],
                     'AuditLog.Datetime.Timezone'=>$audit_log['datetime_timezone'],
-                    'AuditLog.RemoteAddr'=>$audit_log['remote_addr'],
-                    'AuditLog.DenialType'=>$audit_log['denial_type'],
-                    'AuditLog.Request'=>$audit_log['request'],
+                    'AuditLog.RemoteAddr' => $audit_log['remote_addr'],
+                    'AuditLog.DenialType' => $audit_log['denial_type'],
+                    'AuditLog.Request' => $audit_log['request']
                 );
+
+                if( !empty($audit_log['request_summary']) ){
+                    foreach( $audit_log['request_summary'] as $req_title=>$req_value ){
+                        $req_title = ucwords(str_replace('_', chr(32), $req_title));
+                        $req_title_for_template = str_replace(chr(32), '', $req_title);
+                        $req_value_name  = sprintf('AuditLog.%s', $req_title_for_template);
+                        $audit_log_snippet[$req_value_name] = $req_value;
+                    }
+                }
+
                 $template_variables['AuditLogs'] .= sucuriwaf_get_template('auditlogs.snippet.tpl', $audit_log_snippet);
             }
         }
