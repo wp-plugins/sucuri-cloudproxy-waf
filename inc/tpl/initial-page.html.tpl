@@ -119,7 +119,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th width="500" class="thead-with-button">
+                        <th width="280" class="thead-with-button">
                             <span>Denial Type</span>
                             <div class="sucuriwaf-denial-types thead-topright-action">
                                 <form method="post">
@@ -129,8 +129,8 @@
                                 </form>
                             </div>
                         </th>
-                        <th width="150">Date & Time</th>
-                        <th width="140">Remote Address</th>
+                        <th width="170">Date & Time</th>
+                        <th width="150">Remote Address</th>
                         <th>Request</th>
                     </tr>
                 </thead>

@@ -19,7 +19,7 @@
 .sucuriwaf-maincontent a.lastlogins-showall{display:inline-block;float:right}
 .sucuri-alert{position:relative}
 .sucuri-alert-updated{background-color:#bbe8f5 !important;border-color:#4393ac !important}
-.sucuri-alert > a.close{position:absolute;top:8px;right:10px;font-size:18px;text-decoration:none}
+.sucuri-alert a.close{position:absolute;top:8px;right:10px;font-size:18px;text-decoration:none}
 .sucuri-visible{}
 .sucuri-hidden{display:none !important}
 .sucuriwaf-disabled{}
@@ -29,15 +29,16 @@
 table.sucuriwaf-settings{margin:0 0 20px 0}
 table.sucuriwaf-settings td{padding:5px}
 table.sucuriwaf-settings label{display:block;line-height:24px}
-table.sucuriwaf-settings .monospace{font-family:Monospace, Courier, consola;font-weight:bold;line-height:24px}
+.sucuriwaf-monospace, table.sucuriwaf-settings .monospace{font-family:Monospace, Courier, consola}
+table.sucuriwaf-settings .monospace{font-weight:bold;line-height:24px}
 .sucuriwaf-settings .sucuriwaf-apikey-form{}
-.sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-entry{float:left;width:350px;font-family:Monospace, Courier, consola;border-radius:0;padding:0 5px;margin:0;line-height:22px}
+.sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-entry{float:left;width:350px;font-family:Monospace, Courier, consola;border-radius:0;padding:0 5px;margin:0;line-height:26px}
 .sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-button{float:left;margin:0 0 0 5px}
 .sucuriwaf-clearcache-form{}
 .clearfix{clear:both}
-td .sucuri-scrool{width:600px;overflow:auto}
+td .sucuri-scrool{word-break:break-all}
 .sucuriwaf-maincontent .thead-with-button span{line-height:24px}
-.sucuriwaf-maincontent .thead-with-button .input-text{line-height:22px}
+.sucuriwaf-maincontent .thead-with-button .input-text{line-height:26px}
 .sucuriwaf-maincontent .thead-topright-action{display:inline-block;float:right}
 .sucuriwaf-denial-types select{width:100px;font-size:12px;margin:0 5px 0 0;padding:0;float:left}
 .sucuriwaf-search-log .input-text{font-family:Monaco, Monospace, consola;padding:0 5px;margin:0 5px 0 0;width:200px}
@@ -46,9 +47,9 @@ td .sucuri-scrool{width:600px;overflow:auto}
 .pagination a:hover{color:#fff;background:#3279BB}
 .pagination .current{background:#3279BB;color:#fff}
 .sucuriwaf-about-page{}
-.sucuriwaf-about-page > .sucuriwaf-about-info, .sucuriwaf-about-page > .sucuriwaf-about-list{width:49%}
-.sucuriwaf-about-page > .sucuriwaf-about-info{float:left}
-.sucuriwaf-about-page > .sucuriwaf-about-info h4{font-size:14px;text-transform:uppercase;margin-bottom:0}
-.sucuriwaf-about-page > .sucuriwaf-about-list{float:right;clear:none}
+.sucuriwaf-about-page .sucuriwaf-about-info, .sucuriwaf-about-page .sucuriwaf-about-list{width:49%;min-width:initial !important}
+.sucuriwaf-about-page .sucuriwaf-about-info{float:left}
+.sucuriwaf-about-page .sucuriwaf-about-info h4{font-size:14px;text-transform:uppercase;margin-bottom:0}
+.sucuriwaf-about-page .sucuriwaf-about-list{float:right;clear:none}
 .sucuriwaf-about-list td+td{font-family:Monaco, Monspace, Courier;font-weight:bold}
 .sucuriwaf-about-page a.button-primary{display:table;margin:0 auto}
