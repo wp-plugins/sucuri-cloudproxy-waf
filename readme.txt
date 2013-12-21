@@ -3,8 +3,8 @@ Contributors: dd@sucuri.net
 Donate Link: http://cloudproxy.sucuri.net
 Tags: security, waf, protection, malware, sucuri
 Requires at least:3.2
-Stable tag:0.8
-Tested up to: 3.6.1
+Stable tag:0.9
+Tested up to: 3.8
 
 Sucuri CloudProxy WAF is a Cloud-based IPS (intrusion prevention system) and firewall to protect web sites. This plugin will allow you to access your WAF dashboard directly from WordPress and manage the settings, clear caching and see all the attacks that are being blocked.
 
