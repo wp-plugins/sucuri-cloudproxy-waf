@@ -103,8 +103,45 @@ function sucuriwaf_apikey(){
 }
 
 function sucuriwaf_is_active(){
-    $server_address = gethostbyname($_SERVER['HTTP_HOST']);
-    if( preg_match('/cloudproxy.*\.sucuri\.net/', gethostbyaddr($server_address)) ){ return TRUE; }
+    $server_address = sucuriwaf_host_by_name();
+    $server_name = sucuriwaf_host_by_addr($server_address);
+
+    if( preg_match('/cloudproxy.*\.sucuri\.net/', $server_name) ){ return TRUE; }
+
+    return FALSE;
+}
+
+function sucuriwaf_host_by_name(){
+    if( isset($_SERVER['HTTP_HOST']) ){
+        $host_by_parts = parse_url($_SERVER['HTTP_HOST']);
+        if( isset($host_by_parts['host']) ){
+            $hostname = gethostbyname($host_by_parts['host']);
+
+            return $hostname;
+        }
+    }
+
+    return FALSE;
+}
+
+function sucuriwaf_host_by_addr($address=''){
+    if( sucuriwaf_is_valid_ipv4($address) ){
+        return gethostbyaddr($address);
+    }
+
+    return FALSE;
+}
+
+function sucuriwaf_is_valid_ipv4($remote_addr=''){
+    if( preg_match('/^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$/', $remote_addr, $match) ){
+        if( $match[0] <= 0 ){ return FALSE; }
+
+        for( $i=0; $i<4; $i++ ){
+            if( $match[$i] > 255 ){ return FALSE; }
+        }
+
+        return TRUE;
+    }
 
     return FALSE;
 }
