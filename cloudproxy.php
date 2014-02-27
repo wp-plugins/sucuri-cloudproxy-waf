@@ -272,7 +272,12 @@ function sucuriwaf_clearcache(){
 }
 
 function sucuriwaf_real_remoteaddr(){
-    return isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : gethostbyname($_SERVER['HTTP_HOST']);
+    if( isset($_SERVER['REMOTE_ADDR']) ){
+        $remote_addr = ($_SERVER['REMOTE_ADDR'] == '::1') ? '127.0.0.1' : $_SERVER['REMOTE_ADDR'];
+        return $remote_addr;
+    }else{
+        return sucuriwaf_host_by_name();
+    }
 }
 
 function sucuriwaf_cachemode_translation($cache_mode=''){
