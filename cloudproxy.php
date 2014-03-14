@@ -114,11 +114,18 @@ function sucuriwaf_is_active(){
 function sucuriwaf_host_by_name(){
     if( isset($_SERVER['HTTP_HOST']) ){
         $host_by_parts = parse_url($_SERVER['HTTP_HOST']);
-        if( isset($host_by_parts['host']) ){
-            $hostname = gethostbyname($host_by_parts['host']);
+        $host_str = $_SERVER['HTTP_HOST'];
 
-            return $hostname;
+        $valid_indexes = array( 'host', 'path' );
+        foreach( $valid_indexes as $key_name ){
+            if( isset($host_by_parts[$key_name]) ){
+                $host_str = $host_by_parts[$key_name];
+                break;
+            }
         }
+
+        $hostname = gethostbyname($host_str);
+        return $hostname;
     }
 
     return FALSE;
