@@ -41,6 +41,9 @@ Once enabled, it will protect your site against malware infections and reinfecti
 
 == Changelog ==
 
+= 1.0 =
+* Added support for the new servers and naming we have.
+
 = 0.8 =
 * Adding filters + new API url.
 
