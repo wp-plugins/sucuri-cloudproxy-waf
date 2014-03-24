@@ -49,8 +49,8 @@
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td><label>CloudProxy API key</label></td>
+                    <tr class="alternate">
+                        <td width="200"><label>CloudProxy API key</label></td>
                         <td>
                             <div class="clearfix">
                                 <form method="post" class="sucuriwaf-apikey-form">
@@ -63,35 +63,41 @@
                     </li>
 
                     <tr>
-                        <td><label>Website</label></td>
-                        <td><span class="monospace">%%SUCURI.Website%%</span></td>
-                    </tr>
-                    <tr>
-                        <td><label>Your CloudProxy Ip address</label></td>
-                        <td><span class="monospace">%%SUCURI.RealRemoteAddr%%</span></td>
-                    </tr>
-                    <tr>
                         <td><label>CloudProxy state</label></td>
                         <td><span class="monospace">%%SUCURI.CloudproxyState%%</span></td>
                     </tr>
+
+                    <tr class="alternate">
+                        <td><label>Website</label></td>
+                        <td><span class="monospace">%%SUCURI.Website%%</span></td>
+                    </tr>
+
                     <tr>
+                        <td><label>Your CloudProxy Ip address</label></td>
+                        <td><span class="monospace">%%SUCURI.CloudproxyIP%%</span></td>
+                    </tr>
+
+                    <tr class="alternate">
                         <td><label>Internal IP address</label></td>
                         <td><span class="monospace">%%SUCURI.InternalIP%%</span></td>
                     </tr>
+
                     <tr>
                         <td><label>Whitelisted IPs addresses</label></td>
-                        <td><span class="monospace">%%SUCURI.WhitelistedIPs%%</span></td>
+                        <td class="sucuriwaf-whitelisted-ips">%%SUCURI.WhitelistedIPs%%</td>
                     </tr>
-                    <tr>
+
+                    <tr class="alternate">
                         <td><label>Security Mode</label></td>
                         <td><span class="monospace">%%SUCURI.SecurityMode%%</span></td>
                     </tr>
+
                     <tr>
                         <td><label>Cache Mode</label></td>
                         <td><span class="monospace">%%SUCURI.CacheMode%%</span></td>
                     </tr>
 
-                    <tr>
+                    <tr class="alternate">
                         <td><label>Clear cache</label></td>
                         <td>
                             <form method="post" class="sucuriwaf-clearcache-form">

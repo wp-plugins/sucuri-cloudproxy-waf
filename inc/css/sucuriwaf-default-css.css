@@ -28,19 +28,23 @@
 .sucuriwaf-sidebar #sidebar{padding:0}
 table.sucuriwaf-settings{margin:0 0 20px 0}
 table.sucuriwaf-settings label{display:block;line-height:24px}
-.sucuriwaf-monospace, table.sucuriwaf-settings .monospace, .sucuri-request-summary span{font-family:Monospace, Courier, consola}
-table.sucuriwaf-settings .monospace{font-weight:bold;line-height:24px}
+.sucuriwaf-monospace, table.sucuriwaf-settings .monospace, .sucuri-request-summary span, .sucuriwaf-whitelisted-ips{font-family:Monospace, Courier, consola}
+table.sucuriwaf-settings .monospace{line-height:24px}
 .sucuriwaf-settings .sucuriwaf-apikey-form{}
-.sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-entry{float:left;width:350px;font-family:Monospace, Courier, consola;border-radius:0;padding:0 5px;margin:0;line-height:26px}
+.sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-entry{float:left;width:50%;font-family:Monospace, Courier, consola;border-radius:0;padding:0 5px;margin:0;line-height:26px}
 .sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-button{float:left;margin:0 0 0 5px}
-.sucuriwaf-clearcache-form{}
+.sucuriwaf-clearcache-form{display:inline-block}
 .clearfix{clear:both}
 td .sucuri-wraptext{word-break:break-all}
+.sucuriwaf-maincontent .alternate{background:#f5f5f5}
 .sucuriwaf-maincontent .thead-with-button span{line-height:24px}
 .sucuriwaf-maincontent .thead-with-button .input-text{line-height:26px}
 .sucuriwaf-maincontent .thead-topright-action{display:inline-block;float:right}
 .sucuriwaf-denial-types select{width:100px;font-size:12px;margin:0 5px 0 0;padding:0;float:left}
 .sucuriwaf-search-log .input-text{font-family:Monaco, Monospace, consola;padding:0 5px;margin:0 5px 0 0;width:200px}
+.widefat td.sucuriwaf-whitelisted-ips{padding:0}
+.sucuriwaf-whitelisted-ips ul{margin:0;padding:0}
+.sucuriwaf-whitelisted-ips li{margin:0;padding:5px;padding-left:10px}
 .pagination{clear:both;padding:0;position:relative}
 .pagination span, .pagination a{display:block;float:left;margin:0 2px 0 0;padding:5px 10px;text-decoration:none;width:auto;color:#fff;background:#555}
 .pagination a:hover{color:#fff;background:#3279BB}

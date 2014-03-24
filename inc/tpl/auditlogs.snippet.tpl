@@ -1,12 +1,13 @@
-<tr>
+<tr class="%%SUCURI.AuditLog.CssClass%%">
     <td>%%SUCURI.AuditLog.DenialType%%</td>
     <td><span class="sucuriwaf-monospace">%%SUCURI.AuditLog.Datetime.Date%%</span></td>
     <td><span class="sucuriwaf-monospace">%%SUCURI.AuditLog.Datetime.Time%% %%SUCURI.AuditLog.Datetime.Timezone%%</span></td>
     <td><span class="sucuriwaf-monospace">%%SUCURI.AuditLog.RemoteAddr%%</span></td>
     <td>
         <div class="sucuri-wraptext">
-            <a href="#TB_inline?width=600&height=300&inlineId=sucuri-reqsummary-%%SUCURI.AuditLog.Id%%" title="CloudProxy Request Summary" class="button-primary thickbox">Info</a>
-            <span class="sucuriwaf-monospace">%%SUCURI.AuditLog.ResourcePath%%</span>
+            <a href="#TB_inline?width=600&height=300&inlineId=sucuri-reqsummary-%%SUCURI.AuditLog.Id%%" title="CloudProxy Request Summary" class="thickbox">
+                <span class="sucuriwaf-monospace">%%SUCURI.AuditLog.ResourcePath%%</span>
+            </a>
         </div>
         <div id="sucuri-reqsummary-%%SUCURI.AuditLog.Id%%" style="display:none">
             <div class="sucuri-request-summary">

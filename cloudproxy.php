@@ -291,7 +291,7 @@ function sucuriwaf_cachemode_translation($cache_mode=''){
     $translation = 'Unknown';
     switch($cache_mode){
         case 'docache':      $translation = 'Enabled (recommended)'; break;
-        case 'sitecahce':    $translation = 'Site caching (using your site headers)'; break;
+        case 'sitecache':    $translation = 'Site caching (using your site headers)'; break;
         case 'nocache':      $translation = 'Minimial (only for a few minutes)'; break;
         case 'nocacheatall': $translation = 'Caching didabled (use with caution)'; break;
     }
@@ -392,6 +392,21 @@ function sucuriwaf_menu()
                      'sucuriwaf_about', 'sucuri_waf_about_page');
 }
 
+function sucuriwaf_get_whitelisted_ips($settings=array()){
+    if( !isset($settings['whitelistedips']) ){ return ''; }
+
+    $counter = 0;
+    $output = '<ul>';
+    $ip_list = explode( chr(32), $settings['whitelistedips'] );
+    foreach( $ip_list as $ip_addr ){
+        $counter += 1;
+        $css_class = ( $counter%2 == 0 ) ? 'alternate' : '';
+        $output .= sprintf('<li class="%s">%s</li>', $css_class, $ip_addr);
+    }
+    $output .= '</ul>';
+
+    return $output;
+}
 
 function sucuri_waf_page(){
     $U_ERROR = NULL;
@@ -412,11 +427,12 @@ function sucuri_waf_page(){
         'DisabledDisplay'=>sucuriwaf_is_active() ? 'hidden' : 'visible',
         'APIKey'=>( !empty($api_key) ? $api_key['string'] : '' ),
         'Website'=>$settings['site'],
+        'CloudproxyIP'=>gethostbyname($settings['site']),
         'RealRemoteAddr'=>sucuriwaf_real_remoteaddr(),
         'CloudproxyState'=>sucuriwaf_is_active() ? 'Enabled' : 'Disabled',
         'Site'=>$settings['site'],
         'InternalIP'=>$settings['internalip'],
-        'WhitelistedIPs'=>str_replace(chr(32), ' - ', $settings['whitelistedips']),
+        'WhitelistedIPs'=>sucuriwaf_get_whitelisted_ips($settings),
         'SecurityMode'=>$settings['securitymode'],
         'CacheMode'=>sucuriwaf_cachemode_translation($settings['cachemode']),
         'AuditLogs'=>'',
@@ -507,16 +523,19 @@ function sucuri_waf_page(){
         $template_variables['AuditLogs.CountText'] = $template_variables['AuditLogs.Count'].' logs';
 
         if( is_array($audit_log_list) && !empty($audit_log_list) ){
-            foreach($audit_log_list as $i=>$audit_log){
+            $counter = 0;
+            foreach($audit_log_list as $audit_log){
+                $counter += 1;
                 $audit_log_snippet = array(
-                    'AuditLog.Id' => $i,
+                    'AuditLog.Id' => $counter,
                     'AuditLog.Datetime' => $audit_log['datetime'],
                     'AuditLog.Datetime.Date'=>$audit_log['datetime_date'],
                     'AuditLog.Datetime.Time'=>$audit_log['datetime_time'],
                     'AuditLog.Datetime.Timezone'=>$audit_log['datetime_timezone'],
                     'AuditLog.RemoteAddr' => $audit_log['remote_addr'],
                     'AuditLog.DenialType' => $audit_log['denial_type'],
-                    'AuditLog.Request' => $audit_log['request']
+                    'AuditLog.Request' => $audit_log['request'],
+                    'AuditLog.CssClass' => ( $counter%2 == 0 ) ? '' : 'alternate'
                 );
 
                 if( !empty($audit_log['request_summary']) ){
