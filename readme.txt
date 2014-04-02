@@ -30,7 +30,7 @@ Once you signup for it, you will get:
 You can read more about some of the features here: <a
 href="http://cloudproxy.sucuri.net">http://cloudproxy.sucuri.net</a>
 
-Update-to-date pricing and features can always be found on the <a href="http://cloudproxy.sucuri.net">Plans & Pricing</a> page.
+Update-to-date pricing and features can always be found on the <a href="http://cloudproxy.sucuri.net/signup">Plans & Pricing</a> page.
 
 Once enabled, it will protect your site against malware infections and reinfections and all sorts of attacks.
 
@@ -43,7 +43,7 @@ Once enabled, it will protect your site against malware infections and reinfecti
 1. Paste your CloudProxy API key into the plugin.
 1. And you are all set!
 
-Update-to-date pricing and features can always be found on the <a href="http://cloudproxy.sucuri.net">Plans & Pricing</a> page.
+Update-to-date pricing and features can always be found on the <a href="http://cloudproxy.sucuri.net/signup">Plans & Pricing</a> page.
 
 == Changelog ==
 
