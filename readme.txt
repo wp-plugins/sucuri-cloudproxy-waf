@@ -1,17 +1,20 @@
 === Sucuri CloudProxy Web Firewall (WAF) ===
 Contributors: dd@sucuri.net
 Donate Link: http://cloudproxy.sucuri.net
-Tags: security, waf, protection, malware, sucuri
+Tags: security, waf, protection, malware, sucuri, firewall
 Requires at least:3.2
-Stable tag:1.0
-Tested up to: 3.8
+Stable tag:1.1
+Tested up to: 3.8.1
 
-Sucuri CloudProxy WAF is a Cloud-based IPS (intrusion prevention system) and firewall to protect web sites. This plugin will allow you to access your WAF dashboard directly from WordPress and manage the settings, clear caching and see all the attacks that are being blocked.
+Sucuri CloudProxy is a subscription service offering a Firewall (WAF) and Cloud-based IPS (intrusion prevention system) to protect and secure web sites. This plugin will allow you to access your WAF dashboard directly from WordPress and manage the settings, clear caching and see all the attacks that are being blocked.
 
 == Description ==
 
-The Sucuri CloudProxy WAF is a Cloud-based IPS (intrusion prevention system) and firewall for web sites. It runs in the
-Cloud and doesn't require anything to be installed on your site. It includes:
+<a href="http://cloudproxy.sucuri.net">CloudProxy</a> is a Cloud-based WebSite firewall (WAF) and IPS (intrusion prevention system) for web sites. It runs in the Cloud and doesn't require anything to be installed on your site. 
+
+To start safeguarding your site, you need to sign up for a CloudProxy subscription.
+
+Once you signup for it, you will get:
 
 * Traffic filtering (blocking malicious requests)
 * <a href="http://blog.sucuri.net/2013/03/virtual-patching-for-websites-with-sucuri-cloudproxy.html">Virtual patching</a>
@@ -27,6 +30,8 @@ Cloud and doesn't require anything to be installed on your site. It includes:
 You can read more about some of the features here: <a
 href="http://cloudproxy.sucuri.net">http://cloudproxy.sucuri.net</a>
 
+Update-to-date pricing and features can always be found on the <a href="http://cloudproxy.sucuri.net">Plans & Pricing</a> page.
+
 Once enabled, it will protect your site against malware infections and reinfections and all sorts of attacks.
 
 
@@ -34,12 +39,16 @@ Once enabled, it will protect your site against malware infections and reinfecti
 
 1. Download the plugin.
 1. Go to the WordPress Plugin menu and activate it.
-1. If you don't have one already, create your sucuri account here: <a href="https://login.sucuri.net/signup2/create?CloudProxy"></a>
+1. If you don't have one already, create your sucuri account here: <a href="http://cloudproxy.sucuri.net/signup">http://cloudproxy.sucuri.net/signup</a>
 1. Paste your CloudProxy API key into the plugin.
 1. And you are all set!
 
+Update-to-date pricing and features can always be found on the <a href="http://cloudproxy.sucuri.net">Plans & Pricing</a> page.
 
 == Changelog ==
+
+= 1.1 =
+* Improved messaging.
 
 = 1.0 =
 * Added support for the new servers and naming we have.
@@ -68,6 +77,6 @@ Once enabled, it will protect your site against malware infections and reinfecti
 
 == Credits ==
 
- * <a href="http://cloudproxy.sucuri.net">CloudProxy WAF Sign up page</a>
- * <a href="http://sucuri.net">Sucuri, INC</a>
+* <a href="http://cloudproxy.sucuri.net">CloudProxy Sign up page</a>
+* <a href="http://sucuri.net">Sucuri, INC</a>
 
