@@ -6,7 +6,7 @@
             <p><a class="button-primary" href="https://dashboard.sucuri.net/cloudproxy/">Read more &#187;</a></p>
         </div>
 
-        <div id="sucuri-latest-posts" class="sucuriscan-sidebar">
+        <div id="sucuriwaf-latest-posts" class="sucuriscan-sidebar">
             <h2><span class="promo">Always keep a backup of your site!</span></h2>
             <p>Check out the <a href="https://dashboard.sucuri.net/backups/">Sucuri Backup</a>!</p>
             <p><a class="button-primary" href="https://dashboard.sucuri.net/backups/">Read more &#187;</a></p>

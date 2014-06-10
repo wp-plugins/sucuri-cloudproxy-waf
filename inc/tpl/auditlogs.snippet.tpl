@@ -1,20 +1,21 @@
+
 <tr class="%%SUCURI.AuditLog.CssClass%%">
-    <td>%%SUCURI.AuditLog.DenialType%%</td>
-    <td><span class="sucuriwaf-monospace">%%SUCURI.AuditLog.Datetime.Date%%</span></td>
-    <td><span class="sucuriwaf-monospace">%%SUCURI.AuditLog.Datetime.Time%% %%SUCURI.AuditLog.Datetime.Timezone%%</span></td>
+    <td>%%SUCURI.AuditLog.SucuriBlockReason%%</td>
+    <td><span class="sucuriwaf-monospace">%%SUCURI.AuditLog.RequestDate%%</span></td>
+    <td><span class="sucuriwaf-monospace">%%SUCURI.AuditLog.RequestTime%% %%SUCURI.AuditLog.RequestTimezone%%</span></td>
     <td><span class="sucuriwaf-monospace">%%SUCURI.AuditLog.RemoteAddr%%</span></td>
     <td>
-        <div class="sucuri-wraptext">
-            <a href="#TB_inline?width=600&height=300&inlineId=sucuri-reqsummary-%%SUCURI.AuditLog.Id%%" title="CloudProxy Request Summary" class="thickbox">
+        <div class="sucuriwaf-wraptext">
+            <a href="#TB_inline?width=600&height=300&inlineId=sucuriwaf-reqsummary-%%SUCURI.AuditLog.Id%%" title="CloudProxy Request Summary" class="thickbox">
                 <span class="sucuriwaf-monospace">%%SUCURI.AuditLog.ResourcePath%%</span>
             </a>
         </div>
-        <div id="sucuri-reqsummary-%%SUCURI.AuditLog.Id%%" style="display:none">
-            <div class="sucuri-request-summary">
+        <div id="sucuriwaf-reqsummary-%%SUCURI.AuditLog.Id%%" style="display:none">
+            <div class="sucuriwaf-request-summary">
                 <ul>
                     <li>
                         <label>Blocked Reason:</label>
-                        <span>%%SUCURI.AuditLog.DenialType%%</span>
+                        <span>%%SUCURI.AuditLog.SucuriBlockReason%%</span>
                     </li>
                     <li>
                         <label>Remote Address:</label>
@@ -22,7 +23,7 @@
                     </li>
                     <li>
                         <label>Date/Time (Timezone)</label>
-                        <span>%%SUCURI.AuditLog.Datetime.Date%% %%SUCURI.AuditLog.Datetime.Time%% (%%SUCURI.AuditLog.Datetime.Timezone%%)</span>
+                        <span>%%SUCURI.AuditLog.RequestDate%% %%SUCURI.AuditLog.RequestTime%% (%%SUCURI.AuditLog.RequestTimezone%%)</span>
                     </li>
                     <li>
                         <label>Resource Path:</label>

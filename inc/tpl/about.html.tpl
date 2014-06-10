@@ -41,7 +41,7 @@
                 </div>
             </div><!-- End poststuff -->
 
-            <table class="wp-list-table widefat sucuriwaf-about-list sucuri-%%SUCURI.SettingsDisplay%%">
+            <table class="wp-list-table widefat sucuriwaf-about-list sucuriwaf-%%SUCURI.SettingsDisplay%%">
                 <thead>
                     <tr>
                         <th colspan="2">Plugin & Server Information</th>

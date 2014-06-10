@@ -4,38 +4,39 @@
  * Released under the GPL - see LICENSE file for details.
  */
 
-.sucuriwaf_header{background:#333;min-width:255px;margin:20px 0;padding:10px;position:relative;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px}
-.sucuriwaf_header img{float:left;height:40px;background:#fff;border-radius:4px}
-.wrap .sucuriwaf_header h2{color:#fff;float:left;margin-left:10px;line-height:40px;text-shadow:#000 0 1px 0;padding:0}
+.sucuriwaf-clearfix:before, .sucuriwaf-clearfix:after{display:table;content:' '}
+.sucuriwaf-clearfix:after{clear:both}
+.sucuriwaf-header{position:relative;background:#333;margin:0 0 20px 0;padding:10px;border-radius:4px}
+.sucuriwaf-header img{float:left;height:40px;background:#fff;border-radius:4px}
+.wrap .sucuriwaf-header h2{color:#fff;float:left;margin-left:10px;line-height:40px;text-shadow:#000 0 1px 0;padding:0}
 .sucuriwaf-maincontent{padding:0}
 .sucuriwaf-maincontent #poststuff{padding-top:0;margin:0 0 20px 0}
 .sucuriwaf-maincontent .postbox{margin:0}
 #sidebar{padding-top:10px}
 #sidebar .sucuriwaf-sidebar{border:1px solid #CCCCCC;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border-top-left-radius:5px;border-top-right-radius:5px;margin:0 0 10px;padding:10px 15px}
 #sitecleanup.sucuriwaf-sidebar{background-color:#bbe8f5;border-color:#4393ac}
-#sucuri-latest-posts.sucuriwaf-sidebar{background-color:#ececec;border-color:#999}
+#sucuriwaf-latest-posts.sucuriwaf-sidebar{background-color:#ececec;border-color:#999}
 .sucuriwaf-maincontent .widefat tbody th.check-column{padding:6px 0 3px 0}
 .sucuriwaf-maincontent .hardening-box .primary-secondary{margin:0 0 0 10px}
 .sucuriwaf-maincontent a.lastlogins-showall{display:inline-block;float:right}
-.sucuri-alert{position:relative}
-.sucuri-alert-updated{background-color:#bbe8f5 !important;border-color:#4393ac !important}
-.sucuri-alert a.close{position:absolute;top:8px;right:10px;font-size:18px;text-decoration:none}
-.sucuri-visible{}
-.sucuri-hidden{display:none !important}
+.sucuriwaf-alert{position:relative}
+.sucuriwaf-alert a.close{position:absolute;top:8px;right:10px;font-size:18px;text-decoration:none}
+.sucuriwaf-visible{}
+.sucuriwaf-hidden{display:none !important}
 .sucuriwaf-disabled{}
 .sucuriwaf-disabled #poststuff h3{color:#ff0000}
 .sucuriwaf-sidebar{width:25%}
 .sucuriwaf-sidebar #sidebar{padding:0}
 table.sucuriwaf-settings{margin:0 0 20px 0}
 table.sucuriwaf-settings label{display:block;line-height:24px}
-.sucuriwaf-monospace, table.sucuriwaf-settings .monospace, .sucuri-request-summary span, .sucuriwaf-whitelisted-ips{font-family:Monospace, Courier, consola}
+.sucuriwaf-monospace, table.sucuriwaf-settings .monospace, .sucuriwaf-request-summary span, .sucuriwaf-whitelisted-ips{font-family:Monospace, Courier, consola}
 table.sucuriwaf-settings .monospace{line-height:24px}
 .sucuriwaf-settings .sucuriwaf-apikey-form{}
 .sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-entry{float:left;width:50%;font-family:Monospace, Courier, consola;border-radius:0;padding:0 5px;margin:0;line-height:26px}
 .sucuriwaf-settings .sucuriwaf-apikey-form .sucuriwaf-apikey-button{float:left;margin:0 0 0 5px}
 .sucuriwaf-clearcache-form{display:inline-block}
 .clearfix{clear:both}
-td .sucuri-wraptext{word-break:break-all}
+td .sucuriwaf-wraptext{word-break:break-all}
 .sucuriwaf-maincontent .alternate{background:#f5f5f5}
 .sucuriwaf-maincontent .thead-with-button span{line-height:24px}
 .sucuriwaf-maincontent .thead-with-button .input-text{line-height:26px}
@@ -44,7 +45,7 @@ td .sucuri-wraptext{word-break:break-all}
 .sucuriwaf-search-log .input-text{font-family:Monaco, Monospace, consola;padding:0 5px;margin:0 5px 0 0;width:200px}
 .widefat td.sucuriwaf-whitelisted-ips{padding:0}
 .sucuriwaf-whitelisted-ips ul{margin:0;padding:0}
-.sucuriwaf-whitelisted-ips li{margin:0;padding:5px;padding-left:10px}
+.sucuriwaf-whitelisted-ips li{color:#555;margin:0;padding:5px;padding-left:10px}
 .pagination{clear:both;padding:0;position:relative}
 .pagination span, .pagination a{display:block;float:left;margin:0 2px 0 0;padding:5px 10px;text-decoration:none;width:auto;color:#fff;background:#555}
 .pagination a:hover{color:#fff;background:#3279BB}
@@ -56,7 +57,7 @@ td .sucuri-wraptext{word-break:break-all}
 .sucuriwaf-about-page .sucuriwaf-about-list{float:right;clear:none}
 .sucuriwaf-about-list td+td{font-family:Monaco, Monspace, Courier;font-weight:bold}
 .sucuriwaf-about-page a.button-primary{display:table;margin:0 auto}
-.sucuri-request-summary{}
-.sucuri-request-summary label, .sucuri-request-summary span{display:inline-block;font-size:14px}
-.sucuri-request-summary label{width:200px;font-weight:bold}
-.sucuri-request-summary span{max-width:395px;vertical-align:top;word-break:break-all;}
+.sucuriwaf-request-summary{}
+.sucuriwaf-request-summary label, .sucuriwaf-request-summary span{display:inline-block;font-size:14px}
+.sucuriwaf-request-summary label{width:200px;font-weight:bold}
+.sucuriwaf-request-summary span{max-width:395px;vertical-align:top;word-break:break-all;}
