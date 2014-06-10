@@ -491,7 +491,7 @@ function sucuriwaf_menu(){
         'manage_options',
         'sucuriwaf',
         'sucuri_waf_page',
-        SUCURIWAF_URL . 'images/menu-icon.png'
+        SUCURIWAF_URL . 'inc/images/menu-icon.png'
     );
     add_submenu_page(
         'sucuriwaf',
