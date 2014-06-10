@@ -3,8 +3,8 @@ Contributors: dd@sucuri.net
 Donate Link: http://cloudproxy.sucuri.net
 Tags: security, waf, protection, malware, sucuri, firewall
 Requires at least:3.2
-Stable tag:1.1
-Tested up to: 3.8.1
+Stable tag:1.2
+Tested up to: 3.9.1
 
 Sucuri CloudProxy is a subscription service offering a Firewall (WAF) and Cloud-based IPS (intrusion prevention system) to protect and secure web sites. This plugin will allow you to access your WAF dashboard directly from WordPress and manage the settings, clear caching and see all the attacks that are being blocked.
 
@@ -46,6 +46,11 @@ Once enabled, it will protect your site against malware infections and reinfecti
 Update-to-date pricing and features can always be found on the <a href="http://cloudproxy.sucuri.net/signup">Plans & Pricing</a> page.
 
 == Changelog ==
+
+= 1.2 =
+* Fixed CloudProxy status when behind a CDN.
+* New calls to API v2.
+* Code cleanup.
 
 = 1.1 =
 * Improved messaging.
