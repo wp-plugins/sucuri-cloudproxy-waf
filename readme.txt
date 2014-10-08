@@ -2,7 +2,7 @@
 Contributors: dd@sucuri.net
 Donate Link: http://sucuri.net/website-firewall/
 Tags: malware, security, firewall, scan, spam, virus, sucuri, protection, WordPress Security, Login Security, Security Auditing,htaccess,phishing,backdoors,SQL Injection, RFI, LFI, XSS, CSRF, website firewall, Website Security, Performance Optimization, Zero Day, Software Vulnerability, Exploits, Hacks, Attackers, Bad Actors, Reverse Proxy, Two Factor Security, Two Factor Authentication, Security Logs, HeatBleed, Website Protection, Malware Prevention, Website Firewall, Website AntiVirus, Security Response, Security Detection, Security Prevention
-Stable tag:1.3
+Stable tag:1.4
 Tested up to: 4.0
 
 Sucuri Security Website Firewall (CloudProxy) is a subscription based WAF and Cloud-based IPS designed to provide optimal security to everyday websites. 
@@ -139,8 +139,7 @@ many of the software vulnerabilities mentioned above (i.e., RevSlider,
 Mailpoet, etc...).
 
 
-You can read more about some of the features here: [Sucuri Security - Website
-Firewall (CloudProxy)](http://sucuri.net/website-firewall)
+You can read more about some of the features here: [Sucuri Security - Website Firewall (CloudProxy)](http://sucuri.net/website-firewall)
 
 Update-to-date pricing and features can always be found on the [Plans &
 Pricing](http://sucuri.net/website-firewall/signup) page.
@@ -245,9 +244,7 @@ It should not, but it's possible. Some of the features might be redundant, you
 should be able to remove and / or disable redundant features.
 
 
-= Should I use the Sucuri Security Website Firewall (CloudProxy) plugin in
-conjunction with the [Sucuri Security - Auditing, Malware Scanner, and
-Hardening plugin](https://wordpress.org/plugins/sucuri-scanner/)?
+= Should I use the Sucuri Security Website Firewall (CloudProxy) plugin in conjunction with the [Sucuri Security - Auditing, Malware Scanner, and Hardening plugin](https://wordpress.org/plugins/sucuri-scanner/)? =
 
 Once you install the Sucuri Security - Auditing, Malware Scanner, and
 Hardening plugin the Website Firewall plugin will be removed from your
@@ -257,8 +254,11 @@ integrated into our Free Security scanner.
 
 == Changelog ==
 
+= 1.4 = 
+* Cleaning up a few typos.
+
 = 1.3 =
-* Read and content changes.
+* Readme and content changes.
 
 = 1.2 =
 * Fixed CloudProxy status when behind a CDN.
@@ -295,7 +295,6 @@ integrated into our Free Security scanner.
 
 == Credits ==
 
-* <a href="http://sucuri.net/website-firewall/">Sucuri Security Website
-* Firewall (CloudProxy)</a>
+* <a href="http://sucuri.net/website-firewall/">Sucuri Website Firewall (CloudProxy)</a>
 * <a href="http://sucuri.net">Sucuri, Inc</a>
 
